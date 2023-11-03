@@ -17,9 +17,13 @@ export class ExcelQueue {
 
     worksheet.eachRow((row, rowNumber) => {
       const rowData = row.values;
+      console.log(rowData);
       rows.push(rowData);
     });
 
+    console.log('rows are done in excel queue' + rows);
     return rows;
+
+    //delete below code
   }
 }

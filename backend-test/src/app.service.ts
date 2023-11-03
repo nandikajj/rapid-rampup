@@ -10,6 +10,7 @@ export class AppService {
     const processedData = await this.excelQueue.add('process-excel', {
       fileBuffer,
     });
+
     return processedData;
   }
 

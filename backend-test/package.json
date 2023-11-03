@@ -24,6 +24,7 @@
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
+    "adm-zip": "^0.5.10",
     "bull": "^4.11.4",
     "exceljs": "^4.4.0",
     "reflect-metadata": "^0.1.13",
