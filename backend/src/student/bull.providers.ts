@@ -1,4 +1,3 @@
-// src/bull.providers.ts
 import { BullModule } from '@nestjs/bull';
 
 export const bullProviders = BullModule.registerQueue({
