@@ -30,7 +30,7 @@ export class AppController {
 
     let xcelstudents = [];
 
-    workbook.xlsx
+    const t = workbook.xlsx
       .load(buffer)
       .then(function () {
         const worksheet = workbook.getWorksheet(1);
@@ -47,7 +47,9 @@ export class AppController {
           xcelstudents.push(cellArray);
         });
 
+        console.log('inside workbook');
         console.log(xcelstudents);
+        return xcelstudents;
       })
       .catch(function (error) {
         console.error(error);
@@ -59,6 +61,10 @@ export class AppController {
     //   message: 'File uploaded and processed successfully!',
     //   data: processedData.data.fileBuffer,
     // };
+
+    t.then((c) => {
+      this.appService.addAllStudents(c);
+    });
 
     return processedData.data.fileBuffer;
   }

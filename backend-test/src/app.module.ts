@@ -19,6 +19,7 @@ import { StudentEntity } from './student/studentEntity';
       entities: [StudentEntity],
       synchronize: true,
     }),
+    TypeOrmModule.forFeature([StudentEntity]),
     BullModule.forRoot({
       redis: {
         host: 'localhost',
