@@ -5,6 +5,7 @@ import { Queue } from 'bull';
 @Injectable()
 export class AppService {
   constructor(@InjectQueue('excel-queue') private readonly excelQueue: Queue) {}
+  myStudents = [];
 
   async processExcelFile(fileBuffer: Buffer) {
     const processedData = await this.excelQueue.add('process-excel', {
@@ -12,6 +13,15 @@ export class AppService {
     });
 
     return processedData;
+  }
+
+  addAllStudents(myStudents: any) {
+    this.myStudents = [...myStudents];
+    console.log(myStudents);
+  }
+
+  getAllStudentsFromExcel() {
+    return this.myStudents;
   }
 
   getHello(): string {

@@ -7,11 +7,12 @@ import {
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { StudentServie } from './student/student.service';
 const ExcelJS = require('exceljs');
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private appService: AppService) {}
 
   @Get()
   getHello(): string {
@@ -22,13 +23,12 @@ export class AppController {
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(@UploadedFile() file) {
     const processedData = await this.appService.processExcelFile(file.buffer);
-    console.log(processedData.data);
-
-    //delete code between
 
     const byteData = processedData.data.fileBuffer;
     const buffer = Buffer.from(new Uint8Array(byteData));
     const workbook = new ExcelJS.Workbook();
+
+    let xcelstudents = [];
 
     workbook.xlsx
       .load(buffer)
@@ -36,10 +36,18 @@ export class AppController {
         const worksheet = workbook.getWorksheet(1);
         worksheet.eachRow(function (row, rowNumber) {
           // Access cell values in the row
+
+          let cellArray = [];
+
           row.eachCell(function (cell, colNumber) {
-            console.log(`Row ${rowNumber}, Column ${colNumber}: ${cell.value}`);
+            // console.log(`Row ${rowNumber}, Column ${colNumber}: ${cell.value}`);
+            cellArray.push(cell.value);
           });
+
+          xcelstudents.push(cellArray);
         });
+
+        console.log(xcelstudents);
       })
       .catch(function (error) {
         console.error(error);
