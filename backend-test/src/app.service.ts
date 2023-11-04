@@ -26,6 +26,32 @@ export class AppService {
     this.myStudents = [...myStudents];
     console.log('from app service');
     console.log(myStudents);
+
+    this.myStudents.shift();
+
+    this.myStudents.map(async (student) => {
+      console.log(student);
+      let insertstudent = {
+        name: '',
+        age: -1,
+        dob: '',
+        email: '',
+      };
+      insertstudent.name = student[0];
+      insertstudent.dob = student[1];
+      insertstudent.email = student[2];
+
+      console.log(insertstudent);
+
+      const objectDOB = new Date(student[1]).getTime();
+      const currentDate = new Date().getTime();
+
+      const age = (currentDate - objectDOB) / (1000 * 60 * 60 * 24 * 365.25);
+
+      insertstudent.age = Math.floor(age);
+
+      return await this.studentRepository.save(insertstudent);
+    });
   }
 
   getAllStudentsFromExcel() {
