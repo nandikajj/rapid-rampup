@@ -1,3 +1,4 @@
+import { GridModule } from '@progress/kendo-angular-grid';
 import { Component } from '@angular/core';
 import { StudentService } from 'src/app/services/student.service';
 
@@ -7,41 +8,14 @@ import { StudentService } from 'src/app/services/student.service';
   styleUrls: ['./student-table.component.css'],
 })
 export class StudentTableComponent {
-  public gridData = [
-    {
-      ProductID: 1,
-      ProductName: 'Chai',
-      UnitPrice: 18,
-      Category: {
-        CategoryID: 1,
-        CategoryName: 'Beverages',
-      },
-    },
-    {
-      ProductID: 2,
-      ProductName: 'Chang',
-      UnitPrice: 19,
-      Category: {
-        CategoryID: 1,
-        CategoryName: 'Beverages',
-      },
-    },
-    {
-      ProductID: 3,
-      ProductName: 'Aniseed Syrup',
-      UnitPrice: 10,
-      Category: {
-        CategoryID: 2,
-        CategoryName: 'Condiments',
-      },
-    },
-  ];
+  public gridData: any;
 
   constructor(private studentService: StudentService) {}
 
   ngOnInit() {
     this.studentService.getAllStudents().subscribe((sub) => {
       console.log(sub);
+      this.gridData = sub;
     });
   }
 }

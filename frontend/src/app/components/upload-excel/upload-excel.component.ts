@@ -15,7 +15,7 @@ export class UploadExcelComponent {
     formData.append('file', file);
 
     this.http
-      .post('http://localhost:3000/api/upload', formData)
+      .post('http://localhost:3000/upload', formData)
       .subscribe((response) => {
         console.log(response);
       });

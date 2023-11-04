@@ -1,0 +1,28 @@
+.form-container {
+  margin: 20px;
+}
+
+.input-text {
+  width: 500px;
+}
+
+.name-form-label {
+  margin-right: 30px;
+}
+
+.age-form-label {
+  margin-right: 43px;
+}
+
+.birth-form-label {
+  margin-right: 7px;
+}
+
+.email-form-label {
+  margin-right: 35px;
+}
+
+.add-btn {
+  background-color: blue;
+  color: #ffffff;
+}

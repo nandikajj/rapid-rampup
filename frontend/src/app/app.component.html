@@ -1,3 +1,22 @@
 <div>
+  <div>
+    <kendo-appbar position="top">
+      <kendo-appbar-section>
+        <h1 class="title">Student Management</h1>
+      </kendo-appbar-section>
+
+      <kendo-appbar-spacer width="32px"></kendo-appbar-spacer>
+
+      <kendo-appbar-section>
+        <ul>
+          <li routerLink="/student-table"><span>Students Table</span></li>
+          <li routerLink="/add-student"><span>Add Student</span></li>
+          <li routerLink="/upload-excel"><span>Upload Excel</span></li>
+        </ul>
+      </kendo-appbar-section>
+
+      <kendo-appbar-spacer></kendo-appbar-spacer>
+    </kendo-appbar>
+  </div>
   <router-outlet></router-outlet>
 </div>
