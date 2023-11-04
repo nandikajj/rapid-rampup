@@ -11,6 +11,8 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { StudentTableComponent } from './components/student-table/student-table.component';
 import { PageNotfoundComponent } from './components/page-notfound/page-notfound.component';
 import { NavigationModule } from '@progress/kendo-angular-navigation';
+import { GridModule } from '@progress/kendo-angular-grid';
+
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { NavigationModule } from '@progress/kendo-angular-navigation';
     DateInputsModule,
     BrowserAnimationsModule,
     NavigationModule,
+    GridModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
