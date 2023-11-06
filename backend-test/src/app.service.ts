@@ -33,7 +33,6 @@ export class AppService {
       console.log(student);
       let insertstudent = {
         name: '',
-        age: -1,
         dob: '',
         email: '',
       };
@@ -42,13 +41,6 @@ export class AppService {
       insertstudent.email = student[2];
 
       console.log(insertstudent);
-
-      const objectDOB = new Date(student[1]).getTime();
-      const currentDate = new Date().getTime();
-
-      const age = (currentDate - objectDOB) / (1000 * 60 * 60 * 24 * 365.25);
-
-      insertstudent.age = Math.floor(age);
 
       return await this.studentRepository.save(insertstudent);
     });

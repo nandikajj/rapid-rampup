@@ -12,8 +12,5 @@ export class StudentEntity {
   dob: Date;
 
   @Column({ nullable: true })
-  age: number;
-
-  @Column({ nullable: true })
   email: string;
 }

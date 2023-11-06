@@ -34,7 +34,7 @@
               kendoButton
               *ngIf="!opened"
               class="edit-btn"
-              (click)="handleEditStudent()"
+              (click)="handleEditStudent(dataItem.id)"
             >
               Edit
             </button>
@@ -46,17 +46,48 @@
 </div>
 
 <kendo-dialog
-  title="Please confirm"
+  title="Edit Student"
   *ngIf="opened"
   (close)="close('cancel')"
   [minWidth]="250"
   [width]="450"
 >
-  <p style="margin: 30px; text-align: center">
-    Are you sure you want to continue?
-  </p>
-  <kendo-dialog-actions>
+  <div>
+    <form (ngSubmit)="onEditStudent(studentForm)" #studentForm="ngForm">
+      <div class="mb-3">
+        <kendo-label text="Name" class="name-form-label"></kendo-label>
+        <kendo-textbox
+          placeholder="{{ loadEditStudent.name }}"
+          class="input-text"
+          name="name"
+          ngModel
+        ></kendo-textbox>
+      </div>
+
+      <div class="mb-3">
+        <kendo-label text="BirthDate" class="birth-form-label"></kendo-label>
+        <kendo-textbox
+          placeholder="{{ loadEditStudent.dob }}"
+          class="input-text"
+          name="dob"
+          ngModel
+        ></kendo-textbox>
+      </div>
+      <div class="mb-3">
+        <kendo-label text="Email" class="email-form-label"></kendo-label>
+        <kendo-textbox
+          placeholder="{{ loadEditStudent.email }}"
+          class="input-text"
+          name="email"
+          ngModel
+        ></kendo-textbox>
+      </div>
+
+      <button kendoButton type="submit" class="add-btn">Edit Student</button>
+    </form>
+  </div>
+  <!-- <kendo-dialog-actions>
     <button kendoButton (click)="close('no')">No</button>
     <button kendoButton (click)="close('yes')" themeColor="primary">Yes</button>
-  </kendo-dialog-actions>
+  </kendo-dialog-actions> -->
 </kendo-dialog>

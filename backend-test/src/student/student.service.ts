@@ -28,4 +28,22 @@ export class StudentServie {
 
     await this.studentRepository.remove(student);
   }
+
+  async getStudentById({ id }: { id: number }): Promise<StudentEntity> {
+    return this.studentRepository.findOne({ where: { id } });
+  }
+
+  async updateStudent(
+    { id }: { id: number },
+    updatedStudentData: Partial<StudentEntity>,
+  ) {
+    const student = await this.studentRepository.findOne({ where: { id } });
+
+    if (!student) {
+      throw new Error(`Student with ID ${id} not found`);
+    }
+
+    Object.assign(student, updatedStudentData);
+    return this.studentRepository.save(student);
+  }
 }

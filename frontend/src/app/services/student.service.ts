@@ -14,4 +14,15 @@ export class StudentService {
   addStudent(student: any) {
     return this.http.post('http://localhost:3000/students/addStudent', student);
   }
+
+  getStudentById(id: number) {
+    return this.http.get(`http://localhost:3000/students/${id}`);
+  }
+
+  editStudentById(id: number, studentData: any) {
+    return this.http.put(
+      `http://localhost:3000/students/updateStudent/${id}`,
+      studentData
+    );
+  }
 }
