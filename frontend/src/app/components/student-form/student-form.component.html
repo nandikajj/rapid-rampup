@@ -1,10 +1,12 @@
 <div class="form-container">
-  <form>
+  <form (ngSubmit)="onSubmit(studentForm)" #studentForm="ngForm">
     <div class="mb-3">
       <kendo-label text="Name" class="name-form-label"></kendo-label>
       <kendo-textbox
         placeholder="your name here"
         class="input-text"
+        name="name"
+        ngModel
       ></kendo-textbox>
     </div>
     <div class="mb-3">
@@ -12,6 +14,8 @@
       <kendo-textbox
         placeholder="your age here"
         class="input-text"
+        name="age"
+        ngModel
       ></kendo-textbox>
     </div>
     <div class="mb-3">
@@ -19,6 +23,8 @@
       <kendo-textbox
         placeholder="your birthdate here"
         class="input-text"
+        name="dob"
+        ngModel
       ></kendo-textbox>
     </div>
     <div class="mb-3">
@@ -26,9 +32,11 @@
       <kendo-textbox
         placeholder="your email here"
         class="input-text"
+        name="email"
+        ngModel
       ></kendo-textbox>
     </div>
 
-    <button kendoButton class="add-btn">Add Student</button>
+    <button kendoButton type="submit" class="add-btn">Add Student</button>
   </form>
 </div>

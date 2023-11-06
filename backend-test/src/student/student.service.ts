@@ -15,4 +15,8 @@ export class StudentServie {
   getAllStudents(): Promise<StudentEntity[]> {
     return this.studentRepository.find();
   }
+
+  addStudent(studentData: any): Promise<StudentEntity> {
+    return this.studentRepository.save(studentData);
+  }
 }

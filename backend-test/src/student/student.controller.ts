@@ -1,4 +1,4 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { StudentServie } from './student.service';
 import { StudentEntity } from './studentEntity';
 
@@ -9,5 +9,10 @@ export class StudentController {
   @Get()
   getAllStudents(): Promise<StudentEntity[]> {
     return this.studentService.getAllStudents();
+  }
+
+  @Post('addStudent')
+  addStudent(@Body() studentData: Promise<StudentEntity>) {
+    return this.studentService.addStudent(studentData);
   }
 }

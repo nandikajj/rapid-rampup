@@ -17,10 +17,7 @@ import { UploadsModule } from '@progress/kendo-angular-upload';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { LabelModule } from '@progress/kendo-angular-label';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
-
-
-
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -43,6 +40,7 @@ import { ButtonsModule } from '@progress/kendo-angular-buttons';
     InputsModule,
     LabelModule,
     ButtonsModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
