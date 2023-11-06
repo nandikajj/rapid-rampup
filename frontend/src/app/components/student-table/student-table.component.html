@@ -1,8 +1,62 @@
-<kendo-grid [data]="gridData">
-  <kendo-grid-column field="id" title="ID"> </kendo-grid-column>
-  <kendo-grid-column field="name" title="Name"> </kendo-grid-column>
-  <kendo-grid-column field="dob" title="BirthDay"> </kendo-grid-column>
-  <kendo-grid-column field="age" title="Age"> </kendo-grid-column>
-  <kendo-grid-column field="email" title="Email"> </kendo-grid-column>
-  <kendo-grid-column field="" title="Action"> </kendo-grid-column>
-</kendo-grid>
+<div class="container">
+  <div class="row mb-4">
+    <div class="col-md-12 mb-2">
+      <input
+        class="form-control"
+        type="file"
+        (change)="onFileSelected($event)"
+      />
+    </div>
+    <div class="col-md-12">
+      <button kendoButton class="add-btn" (click)="handleUploadExcel()">
+        Add Student
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <kendo-grid [data]="gridData">
+        <kendo-grid-column field="id" title="ID"> </kendo-grid-column>
+        <kendo-grid-column field="name" title="Name"> </kendo-grid-column>
+        <kendo-grid-column field="dob" title="BirthDay"> </kendo-grid-column>
+        <kendo-grid-column field="age" title="Age"> </kendo-grid-column>
+        <kendo-grid-column field="email" title="Email"> </kendo-grid-column>
+        <kendo-grid-column field="" title="Action">
+          <ng-template kendoGridCellTemplate let-dataItem>
+            <button
+              kendoButton
+              class="dlt-btn"
+              (click)="handleDeleteStudent(dataItem.id)"
+            >
+              Delete
+            </button>
+            <button
+              kendoButton
+              *ngIf="!opened"
+              class="edit-btn"
+              (click)="handleEditStudent()"
+            >
+              Edit
+            </button>
+          </ng-template>
+        </kendo-grid-column>
+      </kendo-grid>
+    </div>
+  </div>
+</div>
+
+<kendo-dialog
+  title="Please confirm"
+  *ngIf="opened"
+  (close)="close('cancel')"
+  [minWidth]="250"
+  [width]="450"
+>
+  <p style="margin: 30px; text-align: center">
+    Are you sure you want to continue?
+  </p>
+  <kendo-dialog-actions>
+    <button kendoButton (click)="close('no')">No</button>
+    <button kendoButton (click)="close('yes')" themeColor="primary">Yes</button>
+  </kendo-dialog-actions>
+</kendo-dialog>

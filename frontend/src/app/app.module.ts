@@ -18,6 +18,10 @@ import { InputsModule } from '@progress/kendo-angular-inputs';
 import { LabelModule } from '@progress/kendo-angular-label';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { FormsModule } from '@angular/forms';
+import { NotificationModule } from '@progress/kendo-angular-notification';
+import { DialogsModule } from '@progress/kendo-angular-dialog';
+
+
 
 @NgModule({
   declarations: [
@@ -41,6 +45,8 @@ import { FormsModule } from '@angular/forms';
     LabelModule,
     ButtonsModule,
     FormsModule,
+    NotificationModule,
+    DialogsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

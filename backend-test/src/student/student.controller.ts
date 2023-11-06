@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { StudentServie } from './student.service';
 import { StudentEntity } from './studentEntity';
 
@@ -14,5 +14,11 @@ export class StudentController {
   @Post('addStudent')
   addStudent(@Body() studentData: Promise<StudentEntity>) {
     return this.studentService.addStudent(studentData);
+  }
+
+  @Delete('deleteStudent/:id')
+  async deleteStudent(@Param() deleteData: { id: number }): Promise<void> {
+    const { id } = deleteData;
+    await this.studentService.deleteStudentById({ id });
   }
 }
