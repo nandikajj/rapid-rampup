@@ -6,6 +6,9 @@ import { ExcelQueue } from './excel.queue';
 import { StudentModule } from './student/student.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { StudentEntity } from './student/studentEntity';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -30,6 +33,10 @@ import { StudentEntity } from './student/studentEntity';
       name: 'excel-queue',
     }),
     StudentModule,
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+    }),
   ],
   controllers: [AppController],
   providers: [AppService, ExcelQueue],
