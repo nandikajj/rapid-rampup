@@ -30,11 +30,22 @@ export class StudentTableComponent {
   ) {}
 
   ngOnInit() {
-    this.studentService.getAllStudents().subscribe((sub) => {
-      console.log(sub);
-      console.log('from grid data', sub);
+    this.studentService.getAllStudents().subscribe((response) => {
+      console.log(response);
+      console.log('from grid data', response);
 
-      this.gridData = sub;
+      // this.gridData = sub;
+
+      this.gridData = response as any[];
+
+      this.gridData = this.gridData.map((student: any) => {
+        const birthDate = new Date(student.dob);
+        const currentDate = new Date();
+        const age = currentDate.getFullYear() - birthDate.getFullYear();
+
+        student.dob = student.dob.split('T')[0];
+        return { ...student, age };
+      });
     });
   }
 
@@ -74,7 +85,7 @@ export class StudentTableComponent {
     this.studentService.getStudentById(id).subscribe((res: any) => {
       this.loadEditStudent.id = res.id;
       this.loadEditStudent.name = res.name;
-      this.loadEditStudent.dob = res.dob;
+      this.loadEditStudent.dob = res.dob.split('T')[0];
       this.loadEditStudent.email = res.email;
 
       this.opened = true;
