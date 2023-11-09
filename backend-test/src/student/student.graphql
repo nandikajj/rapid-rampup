@@ -1,0 +1,7 @@
+type Mutation {
+  deleteStudent(id: Int!): Student
+}
+
+type Mutation {
+  updateStudent(id: Int!, updatedStudentData: Student!): Student
+}

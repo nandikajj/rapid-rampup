@@ -17,3 +17,8 @@ scalar DateTime
 type Query {
   students: [Student!]!
 }
+
+type Mutation {
+  deleteStudent(id: Float!): Student!
+  updateStudent(id: Float!): Student!
+}
