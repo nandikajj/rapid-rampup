@@ -22,13 +22,15 @@ export class StudentServie {
 
   async deleteStudentById({ id }: { id: number }): Promise<StudentEntity> {
     const student = await this.studentRepository.findOne({ where: { id } });
+    const mystudent = { ...student };
     if (!student) {
       throw new NotFoundException(`Student with ID ${id} not found`);
     }
 
     await this.studentRepository.remove(student);
-    return student;
+    return mystudent;
   }
+
   async getStudentById({ id }: { id: number }): Promise<StudentEntity> {
     return this.studentRepository.findOne({ where: { id } });
   }

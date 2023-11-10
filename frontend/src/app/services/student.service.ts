@@ -42,4 +42,22 @@ export class StudentService {
       studentData
     );
   }
+
+  deleteStudentById(id: number): Observable<any> {
+    return this.apollo.mutate({
+      mutation: gql`
+        mutation DeleteStudent($id: ID!) {
+          deleteStudent(id: $id) {
+            id
+            name
+            dob
+            email
+          }
+        }
+      `,
+      variables: {
+        id: id.toString(),
+      },
+    });
+  }
 }

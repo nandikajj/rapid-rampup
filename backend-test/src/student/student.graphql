@@ -1,5 +1,12 @@
+type Student {
+  id: ID!
+  name: String!
+  dob: String!
+  email: String!
+}
+
 type Mutation {
-  deleteStudent(id: Int!): Student
+  deleteStudent(id: Int!): String
 }
 
 type Mutation {

@@ -19,6 +19,6 @@ type Query {
 }
 
 type Mutation {
-  deleteStudent(id: Float!): Student!
+  deleteStudent(id: ID!): Student!
   updateStudent(id: Float!): Student!
 }

@@ -72,12 +72,16 @@ export class StudentTableComponent {
   }
 
   handleDeleteStudent(id: number) {
-    this.http
-      .delete(`http://localhost:3000/students/deleteStudent/${id}`)
-      .subscribe((res) => {
-        alert('student deleted successfully!');
-        window.location.reload();
-      });
+    // this.http
+    //   .delete(`http://localhost:3000/students/deleteStudent/${id}`)
+    //   .subscribe((res) => {
+    //     alert('student deleted successfully!');
+    //     window.location.reload();
+    //   });
+
+    this.studentService
+      .deleteStudentById(id)
+      .subscribe((res) => console.log('student deleted ', res));
   }
 
   handleEditStudent(id: number) {
