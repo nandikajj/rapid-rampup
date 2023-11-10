@@ -1,4 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Entity } from 'typeorm';
 
 @ObjectType()
 export class Student {

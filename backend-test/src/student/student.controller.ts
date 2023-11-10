@@ -37,8 +37,8 @@ export class StudentController {
 
   @Put('updateStudent/:id')
   async updateStudent(
-    @Param('id') id: { id: number },
-    @Body() updatedStudentData: Partial<StudentEntity>,
+    @Param('id') id: number,
+    @Body() updatedStudentData: StudentEntity,
   ) {
     const updatedStudent = await this.studentService.updateStudent(
       id,

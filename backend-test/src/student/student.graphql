@@ -9,6 +9,22 @@ type Mutation {
   deleteStudent(id: Int!): String
 }
 
+#delete below if necessary for update function only
+
 type Mutation {
-  updateStudent(id: Int!, updatedStudentData: Student!): Student
+  updateStudent(id: Int!, updatedStudentData: UpdateStudentInput!): Student!
+}
+
+input UpdateStudentInput {
+  id: Int!
+  name: String
+  dob: Date
+  email: String
+}
+
+type Student {
+  id: Int!
+  name: String!
+  dob: Date!
+  email: String!
 }

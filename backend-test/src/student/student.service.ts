@@ -35,10 +35,24 @@ export class StudentServie {
     return this.studentRepository.findOne({ where: { id } });
   }
 
+  // async updateStudent(
+  //   { id }: { id: number },
+  //   updatedStudentData: StudentEntity,
+  // ) {
+  //   const student = await this.studentRepository.findOne({ where: { id } });
+
+  //   if (!student) {
+  //     throw new Error(`Student with ID ${id} not found`);
+  //   }
+
+  //   Object.assign(student, updatedStudentData);
+  //   return this.studentRepository.save(student);
+  // }
+
   async updateStudent(
-    { id }: { id: number },
-    updatedStudentData: Partial<StudentEntity>,
-  ) {
+    id: number,
+    updatedStudentData: StudentEntity,
+  ): Promise<StudentEntity> {
     const student = await this.studentRepository.findOne({ where: { id } });
 
     if (!student) {
@@ -46,6 +60,7 @@ export class StudentServie {
     }
 
     Object.assign(student, updatedStudentData);
+
     return this.studentRepository.save(student);
   }
 }

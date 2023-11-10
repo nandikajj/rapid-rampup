@@ -3,6 +3,7 @@ import { StudentServie } from './student.service';
 import { Student } from './student.entity';
 import { StudentEntity } from './studentEntity';
 import { NotFoundException } from '@nestjs/common';
+import { UpdateStudentInput } from './update-student.input';
 
 @Resolver((of) => Student)
 export class StudentResolver {
@@ -29,11 +30,11 @@ export class StudentResolver {
     return student;
   }
 
-  @Mutation(() => Student)
+  @Mutation((returns) => Student)
   async updateStudent(
     @Args('id') id: number,
-    updatedStudentData: Partial<Student>,
+    @Args('updatedStudentData') updatedStudentData: UpdateStudentInput,
   ): Promise<Student> {
-    return this.studentService.updateStudent({ id }, updatedStudentData);
+    return this.studentService.updateStudent(id, updatedStudentData);
   }
 }
