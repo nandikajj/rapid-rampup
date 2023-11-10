@@ -79,9 +79,19 @@ export class StudentTableComponent {
     //     window.location.reload();
     //   });
 
-    this.studentService
-      .deleteStudentById(id)
-      .subscribe((res) => console.log('student deleted ', res));
+    this.notificationService.show({
+      content: 'Student deleted Successfully!',
+      hideAfter: 1200,
+      position: { horizontal: 'center', vertical: 'top' },
+      animation: { type: 'slide', duration: 0 },
+      type: { style: 'info', icon: true },
+      closable: true,
+    });
+
+    this.studentService.deleteStudentById(id).subscribe((res) => {
+      console.log('student deleted ', res);
+      window.location.reload();
+    });
   }
 
   handleEditStudent(id: number) {
