@@ -127,6 +127,15 @@ export class StudentTableComponent {
 
     console.log('from updated edit form', editForm.value);
 
+    this.notificationService.show({
+      content: 'Student edited Successfully!',
+      hideAfter: 1200,
+      position: { horizontal: 'center', vertical: 'top' },
+      animation: { type: 'slide', duration: 0 },
+      type: { style: 'info', icon: true },
+      closable: true,
+    });
+
     return this.studentService
       .editStudentById(editForm.value.id, editForm.value)
       .subscribe((res) => {

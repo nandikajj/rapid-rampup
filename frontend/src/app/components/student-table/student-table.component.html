@@ -67,12 +67,15 @@
 
       <div class="mb-3">
         <kendo-label text="BirthDate" class="birth-form-label"></kendo-label>
-        <kendo-textbox
-          placeholder="{{ loadEditStudent.dob }}"
-          class="input-text"
+        <kendo-datepicker
           name="dob"
           ngModel
-        ></kendo-textbox>
+          placeholder="Choose a date ..."
+        ></kendo-datepicker>
+        <!-- <kendo-textbox
+          placeholder="{{ loadEditStudent.dob }}"
+          class="input-text"
+        ></kendo-textbox> -->
       </div>
       <div class="mb-3">
         <kendo-label text="Email" class="email-form-label"></kendo-label>
