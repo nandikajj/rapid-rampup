@@ -1,14 +1,31 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Apollo, gql } from 'apollo-angular';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StudentService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private apollo: Apollo) {}
 
-  getAllStudents() {
-    return this.http.get('http://localhost:3000/students');
+  getAllStudents(): Observable<any> {
+    // return this.http.get('http://localhost:3000/students');
+
+    return this.apollo
+      .watchQuery({
+        query: gql`
+          {
+            students {
+              id
+              name
+              dob
+              email
+            }
+          }
+        `,
+      })
+      .valueChanges.pipe(map((result) => result.data));
   }
 
   addStudent(student: any) {

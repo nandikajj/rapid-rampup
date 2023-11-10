@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Queue } from 'bull';
 import { StudentEntity } from './student/studentEntity';
 import { Repository } from 'typeorm';
+import { ExcelQueue } from './excel.queue';
 
 @Injectable()
 export class AppService {
@@ -11,8 +12,13 @@ export class AppService {
     @InjectQueue('excel-queue') private readonly excelQueue: Queue,
     @InjectRepository(StudentEntity)
     private studentRepository: Repository<StudentEntity>,
+    @InjectQueue('excel-queue') private readonly excelQueue2: ExcelQueue,
   ) {}
   myStudents = [];
+
+  async uploadFile(fileBuffer: Buffer) {
+    return await this.excelQueue2.addProcessExcelJob({ fileBuffer });
+  }
 
   async processExcelFile(fileBuffer: Buffer) {
     const processedData = await this.excelQueue.add('process-excel', {

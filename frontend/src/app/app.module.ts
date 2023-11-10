@@ -20,8 +20,10 @@ import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { FormsModule } from '@angular/forms';
 import { NotificationModule } from '@progress/kendo-angular-notification';
 import { DialogsModule } from '@progress/kendo-angular-dialog';
-
-
+import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
+import { HttpLink } from 'apollo-angular/http';
+import { InMemoryCache } from '@apollo/client/core';
+import { TestApolloComponent } from './components/test-apollo/test-apollo.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { DialogsModule } from '@progress/kendo-angular-dialog';
     StudentTableComponent,
     PageNotfoundComponent,
     StudentFormComponent,
+    TestApolloComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,8 +50,22 @@ import { DialogsModule } from '@progress/kendo-angular-dialog';
     FormsModule,
     NotificationModule,
     DialogsModule,
+    ApolloModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APOLLO_OPTIONS,
+      useFactory(httpLink: HttpLink) {
+        return {
+          cache: new InMemoryCache(),
+          link: httpLink.create({
+            uri: 'http://localhost:3000/graphql',
+          }),
+        };
+      },
+      deps: [HttpLink],
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

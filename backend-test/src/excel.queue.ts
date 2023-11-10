@@ -1,10 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { Process, Processor } from '@nestjs/bull';
 import { Job } from 'bull';
+import { InjectQueue } from '@nestjs/bull';
 import * as excel from 'exceljs';
 
 @Processor('excel-queue')
 export class ExcelQueue {
+  constructor(@InjectQueue('excel-queue') private readonly excelQueue) {}
+
   @Process('process-excel')
   async handleProcessExcel(job: Job) {
     const fileBuffer = job.data.fileBuffer;
@@ -25,5 +28,9 @@ export class ExcelQueue {
     return rows;
 
     //delete below code
+  }
+
+  async addProcessExcelJob(data: { fileBuffer: Buffer }) {
+    return await this.excelQueue.add('process-excel', data);
   }
 }

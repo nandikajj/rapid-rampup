@@ -36,15 +36,15 @@ export class StudentTableComponent {
 
       // this.gridData = sub;
 
-      this.gridData = response as any[];
+      this.gridData = response.students as any[];
 
       this.gridData = this.gridData.map((student: any) => {
         const birthDate = new Date(student.dob);
         const currentDate = new Date();
         const age = currentDate.getFullYear() - birthDate.getFullYear();
 
-        student.dob = student.dob.split('T')[0];
-        return { ...student, age };
+        // student.dob = student.dob.split('T')[0];
+        return { ...student, age, dob: student.dob.split('T')[0] };
       });
     });
   }
@@ -75,6 +75,7 @@ export class StudentTableComponent {
     this.http
       .delete(`http://localhost:3000/students/deleteStudent/${id}`)
       .subscribe((res) => {
+        alert('student deleted successfully!');
         window.location.reload();
       });
   }
