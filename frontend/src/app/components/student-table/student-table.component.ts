@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { StudentService } from 'src/app/services/student.service';
 import { NotificationService } from '@progress/kendo-angular-notification';
 import { NgForm } from '@angular/forms';
+import { Apollo, gql } from 'apollo-angular';
 
 @Component({
   selector: 'app-student-table',
@@ -26,7 +27,8 @@ export class StudentTableComponent {
   constructor(
     private http: HttpClient,
     private studentService: StudentService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private apollo: Apollo
   ) {}
 
   ngOnInit() {
@@ -136,11 +138,50 @@ export class StudentTableComponent {
       closable: true,
     });
 
-    return this.studentService
-      .editStudentById(editForm.value.id, editForm.value)
-      .subscribe((res) => {
-        console.log('after update' + res);
-        window.location.reload();
-      });
+    // return this.studentService
+    //   .editStudentById(
+    //     editForm.value.id,
+    //     editForm.value.name,
+    //     new Date('2001-02-02'),
+    //     editForm.value.email
+    //   )
+    //   .subscribe((res) => {
+    //     console.log('after update' + res);
+    //     window.location.reload();
+    //   });
+
+    return this.apollo
+      .mutate({
+        mutation: gql`
+          mutation UpdateStudent($updateStudentInput: UpdateStudentInput) {
+            updateStudent(updatedStudentData: $updateStudentInput) {
+              id
+              name
+              dob
+              email
+            }
+          }
+        `,
+        variables: {
+          updateStudentInput: {
+            id: 182,
+            name: 'kaka',
+            dob: new Date('2001-02-02'),
+            email: 'jsksk',
+          },
+        },
+      })
+      .subscribe(
+        ({ data, errors }) => {
+          if (errors) {
+            console.error('GraphQL errors:', errors);
+          } else {
+            console.log('Updated Student:', data);
+          }
+        },
+        (error) => {
+          console.error('HTTP error:', error);
+        }
+      );
   }
 }

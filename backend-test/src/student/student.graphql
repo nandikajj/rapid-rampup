@@ -1,19 +1,4 @@
-type Student {
-  id: ID!
-  name: String!
-  dob: String!
-  email: String!
-}
-
-type Mutation {
-  deleteStudent(id: Int!): String
-}
-
 #delete below if necessary for update function only
-
-type Mutation {
-  updateStudent(id: Int!, updatedStudentData: UpdateStudentInput!): Student!
-}
 
 input UpdateStudentInput {
   id: Int!
@@ -27,4 +12,9 @@ type Student {
   name: String!
   dob: Date!
   email: String!
+}
+
+type Mutation {
+  deleteStudent(id: Int!): String
+  updateStudent(updatedStudentData: UpdateStudentInput!): Student!
 }

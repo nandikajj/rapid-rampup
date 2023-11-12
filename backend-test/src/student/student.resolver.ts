@@ -30,11 +30,38 @@ export class StudentResolver {
     return student;
   }
 
+  // @Mutation((returns) => Student)
+  // async updateStudent(
+  //   @Args('id') id: number,
+  //   @Args('updatedStudentData') updatedStudentData: UpdateStudentInput,
+  // ): Promise<Student> {
+  //   return this.studentService.updateStudent(id, updatedStudentData);
+  // }
+
+  // @Mutation((returns) => Student)
+  // async updateStudent(
+  //   @Args('id') id: number,
+  //   @Args('updatedStudentData') updatedStudentData: UpdateStudentInput,
+  // ): Promise<StudentEntity> {
+  //   try {
+  //     const updatedStudent = await this.studentService.updateStudent(
+  //       id,
+  //       updatedStudentData,
+  //     );
+  //     return updatedStudent;
+  //   } catch (error) {
+  //     // Handle errors appropriately, e.g., log them or throw a custom GraphQL error
+  //     throw new Error(`Failed to update student: ${error.message}`);
+  //   }
+  // }
+
   @Mutation((returns) => Student)
   async updateStudent(
-    @Args('id') id: number,
-    @Args('updatedStudentData') updatedStudentData: UpdateStudentInput,
-  ): Promise<Student> {
-    return this.studentService.updateStudent(id, updatedStudentData);
+    @Args('updateStudentInput') updateStudentInput: UpdateStudentInput,
+  ): Promise<UpdateStudentInput> {
+    return this.studentService.updateStudent(
+      updateStudentInput.id,
+      updateStudentInput,
+    );
   }
 }

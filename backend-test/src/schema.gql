@@ -20,7 +20,7 @@ type Query {
 
 type Mutation {
   deleteStudent(id: ID!): Student!
-  updateStudent(id: Float!, updatedStudentData: UpdateStudentInput!): Student!
+  updateStudent(updateStudentInput: UpdateStudentInput!): Student!
 }
 
 input UpdateStudentInput {
